@@ -123,7 +123,7 @@ export function IngredientRow({ ingredient, index, onChange, onRemove }: Props) 
                   : "text-ink-muted hover:text-ink-body"
               )}
             >
-              {t === "search" ? "Search USDA" : "Manual"}
+              {t === "search" ? "Search" : "Manual"}
             </button>
           ))}
         </div>
@@ -145,7 +145,7 @@ export function IngredientRow({ ingredient, index, onChange, onRemove }: Props) 
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-ink-muted pointer-events-none" />
               <Input
                 ref={searchRef}
-                placeholder="Search in English (e.g. chicken breast, oats…)"
+                placeholder="Search food (e.g. avena, chicken breast…)"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{ paddingLeft: "2.5rem" }}
@@ -189,7 +189,7 @@ export function IngredientRow({ ingredient, index, onChange, onRemove }: Props) 
 
             {searchQuery.length === 0 && (
               <p className="text-xs text-ink-muted text-center py-1">
-                Type at least 2 characters. Search in English — e.g. "oats" not "avena".{" "}
+                Type at least 2 characters to search.{" "}
                 <button type="button" className="text-accent underline" onClick={() => switchTab("manual")}>
                   Or enter manually
                 </button>

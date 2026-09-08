@@ -2,7 +2,7 @@
 
 class FoodsController < ApplicationController
   def search
-    results = UsdaFoodSearch.search(params[:q].to_s.strip)
+    results = FoodSearch.search(params[:q].to_s.strip)
     render json: results
   end
 end
