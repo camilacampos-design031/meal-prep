@@ -145,10 +145,10 @@ export function IngredientRow({ ingredient, index, onChange, onRemove }: Props) 
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-ink-muted pointer-events-none" />
               <Input
                 ref={searchRef}
-                placeholder="Search for a food (e.g. chicken breast, oats…)"
+                placeholder="Search in English (e.g. chicken breast, oats…)"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-9"
+                style={{ paddingLeft: "2.5rem" }}
                 autoFocus
                 autoComplete="off"
               />
@@ -189,7 +189,7 @@ export function IngredientRow({ ingredient, index, onChange, onRemove }: Props) 
 
             {searchQuery.length === 0 && (
               <p className="text-xs text-ink-muted text-center py-1">
-                Type at least 2 characters to search.{" "}
+                Type at least 2 characters. Search in English — e.g. "oats" not "avena".{" "}
                 <button type="button" className="text-accent underline" onClick={() => switchTab("manual")}>
                   Or enter manually
                 </button>
