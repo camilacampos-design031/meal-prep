@@ -68,13 +68,14 @@ class RegistrationsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to signup_path
   end
 
-  test "signed-in users can reach the dashboard after signup" do
+  test "new users are redirected to onboarding after signup" do
     post signup_path, params: {
       email: "flow@example.com",
       password: "secret123"
     }
 
+    # New user has no nutrition goal → redirected to onboarding
     get dashboard_path
-    assert_response :success
+    assert_redirected_to onboarding_path
   end
 end

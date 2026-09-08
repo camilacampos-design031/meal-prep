@@ -7,6 +7,13 @@ export type CurrentUser = {
   admin: boolean
 } | null
 
+export type NutritionGoal = {
+  protein_grams: number
+  fat_grams: number
+  carbs_grams: number
+  calories: number
+} | null
+
 export type SharedProps = {
   current_user: CurrentUser
   flash: {
@@ -14,6 +21,7 @@ export type SharedProps = {
     alert: string | null
   }
   errors: Record<string, string>
+  nutrition_goal: NutritionGoal
 }
 
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> =

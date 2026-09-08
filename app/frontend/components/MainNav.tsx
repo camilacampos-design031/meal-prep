@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils"
 import type { PageProps } from "@/types/inertia"
 
 const STORAGE_KEY = "main-nav-open"
-const BRAND = "Build New"
+const BRAND = "Meal Prep"
 
 export type NavItemDef = {
   href: string
@@ -312,7 +312,7 @@ function UserMenu({ open }: { open: boolean }) {
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href="/settings" className="no-underline">
-            <Settings /> Settings
+            <Settings /> Macro Goals
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />

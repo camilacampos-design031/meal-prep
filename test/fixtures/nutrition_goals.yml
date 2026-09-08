@@ -1,0 +1,20 @@
+one:
+  user: one
+  protein_grams: 150
+  fat_grams: 60
+  carbs_grams: 200
+  calories: 1940
+
+two:
+  user: two
+  protein_grams: 120
+  fat_grams: 50
+  carbs_grams: 180
+  calories: 1650
+
+admin:
+  user: admin
+  protein_grams: 160
+  fat_grams: 70
+  carbs_grams: 220
+  calories: 2150

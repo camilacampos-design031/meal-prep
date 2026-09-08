@@ -10,9 +10,107 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_04_23_000005) do
+ActiveRecord::Schema[8.0].define(version: 2026_09_08_000009) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "food_logs", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "saved_food_id"
+    t.date "date", null: false
+    t.string "description", null: false
+    t.string "meal_type"
+    t.decimal "calories", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "protein_grams", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "fat_grams", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "carbs_grams", precision: 10, scale: 2, default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["saved_food_id"], name: "index_food_logs_on_saved_food_id"
+    t.index ["user_id", "date"], name: "index_food_logs_on_user_id_and_date"
+    t.index ["user_id"], name: "index_food_logs_on_user_id"
+  end
+
+  create_table "grocery_list_items", force: :cascade do |t|
+    t.bigint "grocery_list_id", null: false
+    t.string "ingredient_name", null: false
+    t.decimal "total_quantity", precision: 10, scale: 2, null: false
+    t.string "unit", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["grocery_list_id"], name: "index_grocery_list_items_on_grocery_list_id"
+  end
+
+  create_table "grocery_lists", force: :cascade do |t|
+    t.bigint "weekly_plan_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["weekly_plan_id"], name: "index_grocery_lists_on_weekly_plan_id", unique: true
+  end
+
+  create_table "meal_slots", force: :cascade do |t|
+    t.bigint "weekly_plan_id", null: false
+    t.bigint "recipe_id"
+    t.integer "day_of_week", null: false
+    t.string "meal_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_meal_slots_on_recipe_id"
+    t.index ["weekly_plan_id", "day_of_week", "meal_type"], name: "idx_on_weekly_plan_id_day_of_week_meal_type_dba0461502", unique: true
+    t.index ["weekly_plan_id"], name: "index_meal_slots_on_weekly_plan_id"
+  end
+
+  create_table "nutrition_goals", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "protein_grams", null: false
+    t.integer "fat_grams", null: false
+    t.integer "carbs_grams", null: false
+    t.integer "calories", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_nutrition_goals_on_user_id", unique: true
+  end
+
+  create_table "recipe_ingredients", force: :cascade do |t|
+    t.bigint "recipe_id", null: false
+    t.string "food_name", null: false
+    t.decimal "quantity", precision: 10, scale: 2, null: false
+    t.string "unit", null: false
+    t.decimal "calories", precision: 10, scale: 2, default: "0.0"
+    t.decimal "protein_grams", precision: 10, scale: 2, default: "0.0"
+    t.decimal "fat_grams", precision: 10, scale: 2, default: "0.0"
+    t.decimal "carbs_grams", precision: 10, scale: 2, default: "0.0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_recipe_ingredients_on_recipe_id"
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name", null: false
+    t.text "description"
+    t.integer "servings", default: 1, null: false
+    t.text "instructions"
+    t.integer "prep_time"
+    t.string "source", default: "manual", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_recipes_on_user_id"
+  end
+
+  create_table "saved_foods", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name", null: false
+    t.string "reference_unit", null: false
+    t.decimal "calories", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "protein_grams", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "fat_grams", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "carbs_grams", precision: 10, scale: 2, default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_saved_foods_on_user_id"
+  end
 
   create_table "sessions", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -175,6 +273,25 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_23_000005) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "weekly_plans", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "week_start_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "week_start_date"], name: "index_weekly_plans_on_user_id_and_week_start_date", unique: true
+    t.index ["user_id"], name: "index_weekly_plans_on_user_id"
+  end
+
+  add_foreign_key "food_logs", "saved_foods"
+  add_foreign_key "food_logs", "users"
+  add_foreign_key "grocery_list_items", "grocery_lists"
+  add_foreign_key "grocery_lists", "weekly_plans"
+  add_foreign_key "meal_slots", "recipes"
+  add_foreign_key "meal_slots", "weekly_plans"
+  add_foreign_key "nutrition_goals", "users"
+  add_foreign_key "recipe_ingredients", "recipes"
+  add_foreign_key "recipes", "users"
+  add_foreign_key "saved_foods", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
@@ -182,4 +299,5 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_23_000005) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "weekly_plans", "users"
 end

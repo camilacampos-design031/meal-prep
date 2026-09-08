@@ -8,6 +8,11 @@ Rails.application.routes.draw do
 
   resources :passwords, param: :token, only: %i[ new create edit update ]
 
+  get  "onboarding", to: "onboarding#show",   as: :onboarding
+  post "onboarding", to: "onboarding#create"
+
+  resource :nutrition_goal, only: %i[update]
+
   get "dashboard", to: "dashboard#show", as: :dashboard
   get "settings",  to: "settings#show",  as: :settings
 
