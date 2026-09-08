@@ -7,6 +7,37 @@ export type CurrentUser = {
   admin: boolean
 } | null
 
+export type RecipeMacros = {
+  calories: number
+  protein_grams: number
+  fat_grams: number
+  carbs_grams: number
+}
+
+export type RecipeIngredient = {
+  id: number
+  food_name: string
+  quantity: number
+  unit: string
+  calories: number
+  protein_grams: number
+  fat_grams: number
+  carbs_grams: number
+}
+
+export type Recipe = {
+  id: number
+  name: string
+  description: string | null
+  servings: number
+  prep_time: number | null
+  source: string
+  created_at: string
+  per_serving: RecipeMacros
+  instructions?: string | null
+  ingredients?: RecipeIngredient[]
+}
+
 export type NutritionGoal = {
   protein_grams: number
   fat_grams: number

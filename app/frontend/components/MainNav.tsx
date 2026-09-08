@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Link, router, usePage } from "@inertiajs/react"
 import {
+  ChefHat,
   ChevronsLeft,
   ChevronsRight,
   Home,
@@ -39,6 +40,12 @@ const DEFAULT_NAV_ITEMS: NavItemDef[] = [
     icon: Home,
     label: "Home",
     match: (url) => url === "/" || url.startsWith("/dashboard"),
+  },
+  {
+    href: "/recipes",
+    icon: ChefHat,
+    label: "Recipes",
+    match: (url) => url.startsWith("/recipes"),
   },
 ]
 

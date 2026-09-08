@@ -1,0 +1,14 @@
+chicken_salad:
+  user: one
+  name: Chicken Salad
+  description: A simple high-protein salad
+  servings: 2
+  instructions: Mix together and serve.
+  prep_time: 10
+  source: manual
+
+protein_shake:
+  user: one
+  name: Protein Shake
+  servings: 1
+  source: manual

@@ -1,0 +1,29 @@
+chicken_breast:
+  recipe: chicken_salad
+  food_name: Chicken Breast
+  quantity: 200.0
+  unit: g
+  calories: 220.0
+  protein_grams: 46.0
+  fat_grams: 4.8
+  carbs_grams: 0.0
+
+mixed_greens:
+  recipe: chicken_salad
+  food_name: Mixed Greens
+  quantity: 100.0
+  unit: g
+  calories: 20.0
+  protein_grams: 2.0
+  fat_grams: 0.3
+  carbs_grams: 3.0
+
+whey_protein:
+  recipe: protein_shake
+  food_name: Whey Protein
+  quantity: 30.0
+  unit: g
+  calories: 120.0
+  protein_grams: 25.0
+  fat_grams: 1.5
+  carbs_grams: 3.0

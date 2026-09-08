@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
   resource :nutrition_goal, only: %i[update]
 
+  resources :recipes
+  get "foods/search", to: "foods#search"
+
   get "dashboard", to: "dashboard#show", as: :dashboard
   get "settings",  to: "settings#show",  as: :settings
 
